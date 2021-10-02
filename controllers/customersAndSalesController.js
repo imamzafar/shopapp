@@ -19,14 +19,14 @@ const getCustomersAndSalesById = asyncHandler(async (req, res) => {
 });
 
 const deleteCustomersAndSales = asyncHandler(async (req, res) => {
-  const customerAndSales = await CustomerAndSales.findById(req.params.id);
+  const customerAndSales = await CustomersAndSales.findById(req.params.id);
 
   if (customerAndSales) {
     await customerAndSales.remove();
-    res.json({ message: "Product removed" });
+    res.json({ message: "customerAndSales removed" });
   } else {
     res.status(404);
-    throw new Error("Product not found");
+    throw new Error("customerAndSales not found");
   }
 });
 
@@ -47,20 +47,21 @@ const createCustomersAndSales = asyncHandler(async (req, res) => {
 });
 
 const updateCustomersAndSales = asyncHandler(async (req, res) => {
-  const { productName, costPerUnit, totalQuantity } = req.body;
+  const { orderItems, user, due, total } = req.body;
 
-  const product = await Product.findById(req.params.id);
+  const customersAndSales = await CustomersAndSales.findById(req.params.id);
 
-  if (product) {
-    product.productName = productName;
-    product.costPerUnit = costPerUnit;
-    product.totalQuantity = totalQuantity;
+  if (customersAndSales) {
+    customersAndSales.user = user;
+    customersAndSales.sales = { orderItems };
+    customersAndSales.due = due;
+    customersAndSales.total = total;
 
-    const updatedProduct = await product.save();
-    res.json(updatedProduct);
+    const updatedCustomersAndSales = await customersAndSales.save();
+    res.json(updatedCustomersAndSales);
   } else {
     res.status(404);
-    throw new Error("Product not found");
+    throw new Error("Customers and sales not found");
   }
 });
 

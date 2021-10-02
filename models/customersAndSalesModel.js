@@ -12,6 +12,10 @@ const salesSchema = mongoose.Schema(
         // name: { type: String, required: true },
         qty: { type: Number, required: true },
         rate: { type: Number, required: true },
+        qtytype: {
+          type: String,
+          required: true,
+        },
       },
     ],
   },
