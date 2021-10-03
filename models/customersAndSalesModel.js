@@ -4,11 +4,12 @@ const salesSchema = mongoose.Schema(
   {
     orderItems: [
       {
-        product: {
+        productId: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
           ref: "Product",
         },
+        productName: { type: String, required: true },
         // name: { type: String, required: true },
         qty: { type: Number, required: true },
         rate: { type: Number, required: true },
