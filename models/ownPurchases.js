@@ -7,15 +7,15 @@ const ownPurchasesSchema = mongoose.Schema({
   },
   quantity: {
     type: Number,
+    
   },
-  dueAmount: {
-    type: Number,
+  qtyType: {
+    type: String,
   },
 });
 
-const ownPurchasesSchema = mongoose.model(
-  "ownPurchasesSchema",
-  ownPurchasesSchema
-);
+const OwnPurchases = mongoose.model("OwnPurchases", ownPurchasesSchema);
 
-export default ownPurchasesSchema;
+export default OwnPurchases;
+
+

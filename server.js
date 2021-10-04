@@ -7,9 +7,10 @@ import morgan from "morgan";
 import connectDB from "./config/db.js";
 
 import productRoutes from "./routes/productRoutes.js";
-import customerAndSalesRoutes from './routes/customersAndSalesRoutes.js'
+import customerAndSalesRoutes from "./routes/customersAndSalesRoutes.js";
 
-import userRoutes from './routes/userRoutes.js'
+import ownPurchasesRoutes from "./routes/ownPurchasesRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 // import orderRoutes from './routes/orderRoutes.js'
 // import uploadRoutes from './routes/uploadRoutes.js'
 
@@ -27,8 +28,9 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
-app.use('/api/customerAndSalesRoutes', customerAndSalesRoutes)
-app.use('/api/users', userRoutes)
+app.use("/api/customerAndSalesRoutes", customerAndSalesRoutes);
+app.use("/api/ownPurchases", ownPurchasesRoutes);
+app.use("/api/users", userRoutes);
 
 // app.use('/api/orders', orderRoutes)
 // app.use('/api/upload', uploadRoutes)
