@@ -28,7 +28,7 @@ const deleteOwnPurchase = asyncHandler(async (req, res) => {
   const ownPurchase = await OwnPurchases.findById(req.params.id);
 
   if (ownPurchase) {
-    await OwnPurchases.remove();
+    await ownPurchase.remove();
     res.json({ message: "Product removed" });
   } else {
     res.status(404);
