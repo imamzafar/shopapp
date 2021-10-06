@@ -7,9 +7,11 @@ import {
   deleteCustomersAndSales,
   createCustomersAndSales,
   updateCustomersAndSales,
+  deleteaUsersSales,
 } from "../controllers/customersAndSalesController.js";
 
 router.route("/").get(getCustomersAndSales).post(createCustomersAndSales);
+router.route("/user/:id").delete(deleteaUsersSales);
 
 router
   .route("/:id")

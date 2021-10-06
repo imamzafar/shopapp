@@ -122,19 +122,41 @@ const updateUser = asyncHandler(async (req, res) => {
 
 const getUsersAndSales = asyncHandler(async (req, res) => {
   // const users = await User.find({});
-  const users = await User.aggregate([
-    {
-      $lookup: {
-        from: "customersandsales",
-        localField: "_id",
-        foreignField: "user",
-        as: "allSales",
+  const users = await User.aggregate(
+    [
+      {
+        $lookup: {
+          from: "customersandsales",
+          localField: "_id",
+          foreignField: "user",
+          as: "allSales",
+        },
       },
-    },
-  ],"createdAt updatedAt _id name allSales");
+    ],
+    "createdAt updatedAt _id name allSales"
+  );
 
   res.json(users);
 });
+
+// const deleteUserSales = asyncHandler(async (req, res) => {
+//   // const users = await User.find({});
+//   const users = await User.aggregate(
+//     [
+//       {
+//         $lookup: {
+//           from: "customersandsales",
+//           localField: "_id",
+//           foreignField: "user",
+//           as: "allSales",
+//         },
+//       },
+//     ],
+//     "createdAt updatedAt _id name allSales"
+//   );
+
+//   res.json(users);
+// });
 
 async function getPostData() {
   const walkDataDb = await db.post.aggregate([
@@ -179,4 +201,5 @@ export {
   getUserById,
   updateUser,
   getUsersAndSales,
+  // deleteUserSales,
 };

@@ -65,10 +65,29 @@ const updateCustomersAndSales = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteaUsersSales = asyncHandler(async (req, res) => {
+  var myquery = { user: req.params.id };
+
+  // CustomersAndSales.deleteMany(myquery, function (err, obj) {
+  //   if (err) throw err;
+  //   console.log(" document(s) deleted");
+  // });
+
+  try {
+    await CustomersAndSales.deleteMany(myquery);
+    res.json({ message: "removed" });
+  } catch (err) {
+    res.end(err.message);
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
 export {
   getCustomersAndSales,
   getCustomersAndSalesById,
   deleteCustomersAndSales,
   createCustomersAndSales,
   updateCustomersAndSales,
+  deleteaUsersSales,
 };
