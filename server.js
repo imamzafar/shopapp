@@ -11,6 +11,9 @@ import customerAndSalesRoutes from "./routes/customersAndSalesRoutes.js";
 
 import ownPurchasesRoutes from "./routes/ownPurchasesRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+
+import balanceSheetRoutes from "./routes/balanceSheetRoute.js";
+
 // import orderRoutes from './routes/orderRoutes.js'
 // import uploadRoutes from './routes/uploadRoutes.js'
 
@@ -31,6 +34,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/customerAndSalesRoutes", customerAndSalesRoutes);
 app.use("/api/ownPurchases", ownPurchasesRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/balancesheet", balanceSheetRoutes);
 
 // app.use('/api/orders', orderRoutes)
 // app.use('/api/upload', uploadRoutes)
