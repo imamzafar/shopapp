@@ -15,6 +15,10 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    qtyType: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
