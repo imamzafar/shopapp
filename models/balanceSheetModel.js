@@ -2,12 +2,8 @@ import mongoose from "mongoose";
 
 const balanceSheetSchema = mongoose.Schema(
   {
-    customerName: {
+    FinalDrawerMoney: {
       type: String,
-      required: true,
-    },
-    due: {
-      type: Number,
       required: true,
     },
   },

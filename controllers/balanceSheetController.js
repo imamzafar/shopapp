@@ -7,17 +7,16 @@ const getBalanceSheetInfo = asyncHandler(async (req, res) => {
 });
 
 const addBalance = asyncHandler(async (req, res) => {
-  const { customerName, due } = req.body;
+  const { FinalDrawerMoney } = req.body;
 
   const balance = await BalanceSheet.create({
-    customerName,
-    due,
+    FinalDrawerMoney,
   });
 
   if (balance) {
     res.status(201).json({
       _id: balance._id,
-      name: balance.customerName,
+      FinalDrawerMoney: balance.FinalDrawerMoney,
     });
   } else {
     res.status(400);
@@ -29,15 +28,14 @@ const updateACustomerBalanceById = asyncHandler(async (req, res) => {
   const balance = await BalanceSheet.findById(req.params.id);
 
   if (balance) {
-    balance.customerName = req.body.customerName || balance.customerName;
-    balance.due = req.body.due || balance.due;
+    balance.FinalDrawerMoney =
+      req.body.FinalDrawerMoney || balance.FinalDrawerMoney;
 
     const updatedBalance = await balance.save();
 
     res.json({
       _id: updatedBalance._id,
-      customerName: updatedBalance.customerName,
-      due: updatedBalance.due,
+      FinalDrawerMoney: updatedBalance.FinalDrawerMoney,
     });
   } else {
     res.status(404);
