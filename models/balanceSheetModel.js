@@ -3,8 +3,23 @@ import mongoose from "mongoose";
 const balanceSheetSchema = mongoose.Schema(
   {
     FinalDrawerMoney: {
-      type: String,
-      required: true,
+      type: Number,
+      // required: true,
+    },
+    Comments: [
+      {
+        comment: {
+          type: String,
+           required: true
+        },
+      },
+      {
+        timestamps: true,
+      },
+    ],
+    InitialDrawerMoney: {
+      type: Number,
+      // required: true
     },
   },
   {
@@ -15,5 +30,3 @@ const balanceSheetSchema = mongoose.Schema(
 const BalanceSheet = mongoose.model("BalanceSheet", balanceSheetSchema);
 
 export default BalanceSheet;
-
-

@@ -6,17 +6,31 @@ const getBalanceSheetInfo = asyncHandler(async (req, res) => {
   res.json(balanceSheetInfo);
 });
 
+const getBalanceSheetInfoById = asyncHandler(async (req, res) => {
+  const balanceSheetInfoById = await BalanceSheet.findById(req.params.id);
+  if (balanceSheetInfoById) {
+    res.json(balanceSheetInfoById);
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
 const addBalance = asyncHandler(async (req, res) => {
-  const { FinalDrawerMoney } = req.body;
+  const { FinalDrawerMoney, Comments, InitialDrawerMoney } = req.body;
 
   const balance = await BalanceSheet.create({
     FinalDrawerMoney,
+    Comments,
+    InitialDrawerMoney,
   });
 
   if (balance) {
     res.status(201).json({
       _id: balance._id,
       FinalDrawerMoney: balance.FinalDrawerMoney,
+      Comments: balance.Comments,
+      InitialDrawerMoney: balance.InitialDrawerMoney,
     });
   } else {
     res.status(400);
@@ -26,16 +40,19 @@ const addBalance = asyncHandler(async (req, res) => {
 
 const updateACustomerBalanceById = asyncHandler(async (req, res) => {
   const balance = await BalanceSheet.findById(req.params.id);
-
+  console.log(balance.Comments);
   if (balance) {
     balance.FinalDrawerMoney =
       req.body.FinalDrawerMoney || balance.FinalDrawerMoney;
+    balance.Comments.push(req.body.Comments[0]);
 
     const updatedBalance = await balance.save();
 
     res.json({
       _id: updatedBalance._id,
       FinalDrawerMoney: updatedBalance.FinalDrawerMoney,
+      InitialDrawerMoney: updatedBalance.InitialDrawerMoney,
+      Comments: updatedBalance.Comments,
     });
   } else {
     res.status(404);
@@ -59,6 +76,7 @@ const deleteACustomerBalanceById = asyncHandler(async (req, res) => {
 
 export {
   getBalanceSheetInfo,
+  getBalanceSheetInfoById,
   addBalance,
   deleteACustomerBalanceById,
   updateACustomerBalanceById,
