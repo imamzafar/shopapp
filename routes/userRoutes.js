@@ -6,9 +6,9 @@ import {
   // getUserProfile,
   // updateUserProfile,
   getUsers,
-  // deleteUser,
+  deleteUser,
   // getUserById,
-  // updateUser,
+  updateUser,
   getUsersAndSales,
 } from "../controllers/userController.js";
 
@@ -19,10 +19,9 @@ router.route("/sales").get(getUsersAndSales);
 //   .route('/profile')
 //   .get(protect, getUserProfile)
 //   .put(protect, updateUserProfile)
-// router
-//   .route('/:id')
-//   .delete(protect, admin, deleteUser)
+router.route("/:id")
+.delete(deleteUser)
+.put(updateUser);
 //   .get(protect, admin, getUserById)
-//   .put(protect, admin, updateUser)
 
 export default router;

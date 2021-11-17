@@ -6,7 +6,7 @@ import User from "../models/userModel.js";
 // @route   POST /api/users
 // @access  Public
 const addUser = asyncHandler(async (req, res) => {
-  const { name } = req.body;
+  const { name, number, address } = req.body;
 
   const userExists = await User.findOne({ name });
 
@@ -17,12 +17,16 @@ const addUser = asyncHandler(async (req, res) => {
 
   const user = await User.create({
     name,
+    number,
+    address,
   });
 
   if (user) {
     res.status(201).json({
       _id: user._id,
       name: user.name,
+      number: user.number,
+      address: user.address,
     });
   } else {
     res.status(400);
@@ -69,17 +73,17 @@ const getUsers = asyncHandler(async (req, res) => {
 // @desc    Delete user
 // @route   DELETE /api/users/:id
 // @access  Private/Admin
-// const deleteUser = asyncHandler(async (req, res) => {
-//   const user = await User.findById(req.params.id);
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
 
-//   if (user) {
-//     await user.remove();
-//     res.json({ message: "User removed" });
-//   } else {
-//     res.status(404);
-//     throw new Error("User not found");
-//   }
-// });
+  if (user) {
+    await user.remove();
+    res.json({ message: "User removed" });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
 
 // @desc    Get user by ID
 // @route   GET /api/users/:id
@@ -103,16 +107,16 @@ const updateUser = asyncHandler(async (req, res) => {
 
   if (user) {
     user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin;
+    user.number = req.body.number || user.number;
+    user.address = req.body.address;
 
     const updatedUser = await user.save();
 
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
+      number: updatedUser.number,
+      address: updatedUser.address,
     });
   } else {
     res.status(404);
@@ -197,7 +201,7 @@ export {
   addUser,
   // updateUserProfile,
   getUsers,
-  // deleteUser,
+  deleteUser,
   getUserById,
   updateUser,
   getUsersAndSales,
