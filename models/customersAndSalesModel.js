@@ -25,6 +25,8 @@ const salesSchema = mongoose.Schema(
   }
 );
 
+
+
 const customersAndSalesSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
