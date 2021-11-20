@@ -25,26 +25,29 @@ const salesSchema = mongoose.Schema(
   }
 );
 
+const customersAndSalesSchema = mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
 
-
-const customersAndSalesSchema = mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "User",
+    sales: salesSchema,
+    total: {
+      type: Number,
+    },
+    due: {
+      type: Number,
+    },
+    fare: {
+      type: Number,
+    },
   },
-
-  sales: salesSchema,
-  total: {
-    type: Number,
-  },
-  due: {
-    type: Number,
-  },
-  fare: {
-    type: Number,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const customersAndSales = mongoose.model(
   "customersAndSales",
