@@ -39,6 +39,9 @@ const customersAndSalesSchema = mongoose.Schema({
   due: {
     type: Number,
   },
+  fare: {
+    type: Number,
+  },
 });
 
 const customersAndSales = mongoose.model(

@@ -31,7 +31,7 @@ const deleteCustomersAndSales = asyncHandler(async (req, res) => {
 });
 
 const createCustomersAndSales = asyncHandler(async (req, res) => {
-  const { orderItems, user, due, total } = req.body;
+  const { orderItems, user, due, total, fare } = req.body;
   const customersAndSales = new CustomersAndSales({
     // userid
     user,
@@ -40,6 +40,7 @@ const createCustomersAndSales = asyncHandler(async (req, res) => {
     },
     due,
     total,
+    fare,
   });
   //   customerName
   const createCustomerAndSales = await customersAndSales.save();
@@ -47,7 +48,7 @@ const createCustomersAndSales = asyncHandler(async (req, res) => {
 });
 
 const updateCustomersAndSales = asyncHandler(async (req, res) => {
-  const { orderItems, user, due, total } = req.body;
+  const { orderItems, user, due, total, fare } = req.body;
 
   const customersAndSales = await CustomersAndSales.findById(req.params.id);
 
@@ -56,6 +57,7 @@ const updateCustomersAndSales = asyncHandler(async (req, res) => {
     customersAndSales.sales = { orderItems };
     customersAndSales.due = due;
     customersAndSales.total = total;
+    customersAndSales.fare = fare;
 
     const updatedCustomersAndSales = await customersAndSales.save();
     res.json(updatedCustomersAndSales);
