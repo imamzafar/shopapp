@@ -107,16 +107,12 @@ const updateUser = asyncHandler(async (req, res) => {
 
   if (user) {
     user.name = req.body.name || user.name;
-    user.number = req.body.number || user.number;
     user.address = req.body.address || user.address;
 
     const updatedUser = await user.save();
 
     res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      number: updatedUser.number,
-      address: updatedUser.address,
+      updatedUser
     });
   } else {
     res.status(404);
