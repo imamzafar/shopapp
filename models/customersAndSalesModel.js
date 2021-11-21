@@ -19,10 +19,10 @@ const salesSchema = mongoose.Schema(
         },
       },
     ],
-  },
-  {
-    timestamps: true,
   }
+  // {
+  //   timestamps: true,
+  // }
 );
 
 const customersAndSalesSchema = mongoose.Schema(
