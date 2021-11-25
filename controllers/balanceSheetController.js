@@ -27,10 +27,7 @@ const addBalance = asyncHandler(async (req, res) => {
 
   if (balance) {
     res.status(201).json({
-      _id: balance._id,
-      FinalDrawerMoney: balance.FinalDrawerMoney,
-      Comments: balance.Comments,
-      InitialDrawerMoney: balance.InitialDrawerMoney,
+      balance
     });
   } else {
     res.status(400);
@@ -49,10 +46,7 @@ const updateACustomerBalanceById = asyncHandler(async (req, res) => {
     const updatedBalance = await balance.save();
 
     res.json({
-      _id: updatedBalance._id,
-      FinalDrawerMoney: updatedBalance.FinalDrawerMoney,
-      InitialDrawerMoney: updatedBalance.InitialDrawerMoney,
-      Comments: updatedBalance.Comments,
+      updatedBalance
     });
   } else {
     res.status(404);
